@@ -62,6 +62,7 @@ def get_read_value():
     while True:
         response = input('Enter \'read\' if book is read or \'not read\' if book is not read: ')
         if response.lower() in ['read', 'not read']:
+            print('Read status changed from "not read" to "read", good job!')
             return response.lower() == 'read'
         else:
             print('Type \'read\' or \'not read\'')
