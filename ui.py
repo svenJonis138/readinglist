@@ -1,4 +1,8 @@
-from bookstore import Book
+from bookstore import Book, BookStore
+from menu import Menu
+import ui
+
+store = BookStore()
 
 
 def display_menu_get_choice(menu):
@@ -36,6 +40,7 @@ def show_books(books):
 def get_book_info():
     """ Create a new Book from title and author provided by user
      :returns: a Book created from the title and author. """
+
     title = input('Enter book title: ')
     author = input('Enter book author: ')
     return Book(title, author)
@@ -72,3 +77,15 @@ def ask_question(question):
     :param: the question to ask
     :returns: user's response """
     return input(question)
+
+
+def book_already_added(new_book):
+    """ Checks to see if new book is a duplicate """
+    books = store.get_all_books()
+    titles = []
+    for book in books:
+        titles.append(book.title)
+    if new_book.title in titles:
+        return True
+    else:
+        return False

@@ -32,9 +32,16 @@ def create_menu():
 
 
 def add_book():
+    """ Added a call to check if new book was already in the list
+    and prevent crash if it was a duplicate"""
     new_book = ui.get_book_info()
-    new_book.save()
-    
+    if not ui.book_already_added(new_book):
+        new_book.save()
+    else:
+        print("Book is already in list \n")
+
+
+1
 
 def show_read_books():
     read_books = store.get_books_by_read_value(True)
