@@ -19,6 +19,8 @@ class Book:
 
 
     def save(self):
+        """ uses id to determine if book exists or not, if it does it will update the record. If
+        no record exists (new book added) it will create a new record"""
         if self.id:
             self.bookstore._update_book(self)
         else:
