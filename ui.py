@@ -8,6 +8,8 @@ def display_menu_get_choice(menu):
     while True:
         print(menu)
         choice = input('Enter choice? ')
+        if choice.isalpha():
+            choice = choice.upper()
         if menu.is_valid(choice):
             return choice
         else:
