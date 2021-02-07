@@ -75,10 +75,11 @@ def change_read():
 
 
 def delete_book():
-    book_to_delete = ui.get_book_info()
-
+    book_id = ui.get_book_id()
+    book_to_delete = store.get_book_by_id(book_id)
     if ui.book_already_added(book_to_delete):
         book_to_delete.delete()
+        ui.message('Book deleted \n')
     else:
         ui.message('Book not found in list \n')
 
