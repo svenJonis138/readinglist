@@ -6,8 +6,8 @@ import ui
 
 store = BookStore()
 
-def main():
 
+def main():
     menu = create_menu()
 
     while True:
@@ -26,6 +26,7 @@ def create_menu():
     menu.add_option('4', 'Show Read Books', show_read_books)
     menu.add_option('5', 'Show All Books', show_all_books)
     menu.add_option('6', 'Change Book Read Status', change_read)
+    menu.add_option('7', 'Delete book from list', delete_book)
     menu.add_option('Q', 'Quit', quit_program)
 
     return menu
@@ -43,6 +44,7 @@ def add_book():
 
 1
 
+
 def show_read_books():
     read_books = store.get_books_by_read_value(True)
     ui.show_books(read_books)
@@ -59,22 +61,30 @@ def show_all_books():
 
 
 def search_book():
-    search_term = ui.ask_question('Enter search term, will match partial authors or titles.')
+    search_term = ui.ask_question('Enter search term, will match partial authors or titles.\n')
     matches = store.book_search(search_term)
     ui.show_books(matches)
 
 
 def change_read():
-
     book_id = ui.get_book_id()
-    book = store.get_book_by_id(book_id)  
-    new_read = ui.get_read_value()     
-    book.read = new_read 
+    book = store.get_book_by_id(book_id)
+    new_read = ui.get_read_value()
+    book.read = new_read
     book.save()
-    
+
+
+def delete_book():
+    book_to_delete = ui.get_book_info()
+
+    if ui.book_already_added(book_to_delete):
+        book_to_delete.delete()
+    else:
+        ui.message('Book not found in list \n')
+
 
 def quit_program():
-    ui.message('Thanks and bye!')
+    ui.message('Thanks and bye \n!')
 
 
 if __name__ == '__main__':
