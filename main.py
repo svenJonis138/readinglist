@@ -68,11 +68,14 @@ def search_book():
 
 def change_read():
     book_id = ui.get_book_id()
+    try:
+        book = store.get_book_by_id(book_id)
+        new_read = ui.get_read_value()
+        book.read = new_read
+        book.save()
+    except UnboundLocalError as e:
+        ui.message('Book not found \n')
 
-    book = store.get_book_by_id(book_id)
-    new_read = ui.get_read_value()
-    book.read = new_read
-    book.save()
 
 
 def delete_book():
@@ -83,14 +86,6 @@ def delete_book():
         ui.message('Book deleted \n')
     else:
         ui.message('Book not found in list \n')
-
-    try:
-        book = store.get_book_by_id(book_id)
-        new_read = ui.get_read_value()
-        book.read = new_read
-        book.save()
-    except UnboundLocalError as e:
-        ui.message('Book not found \n')
 
 
 def quit_program():
